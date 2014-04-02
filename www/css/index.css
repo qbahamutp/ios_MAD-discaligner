@@ -1,0 +1,395 @@
+/*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements.	See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.	 The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.	You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied.	 See the License for the
+* specific language governing permissions and limitations
+* under the License.
+*/
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	width:100%;
+	height:100%;
+	margin:0px;
+	padding:0px;
+	-webkit-touch-callout: none;								/* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust: none;							/* prevent webkit from resizing text to fit */
+	-webkit-user-select: none;									/* prevent copy paste, to allow, change 'none' to 'text' */
+	background-color:#E4E4E4;
+	background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+	background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+	background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
+	background-image:-webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+			color-stop(0, #A7A7A7),
+			color-stop(0.51, #E4E4E4)
+	);
+	background-attachment:fixed;
+	font-family:'Tahoma', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	font-size:12px;
+	overflow: hidden;
+}
+
+/* Portrait layout (default) */
+.app {
+	text-align:center;
+	height: 100%;
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+	.app {
+	}
+}
+
+h1 {
+	font-size:24px;
+	font-weight:normal;
+	margin:0px;
+	overflow:visible;
+	padding:0px;
+	text-align:center;
+}
+
+/* DEFAULT CRAP */
+.event {
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	color:#FFFFFF;
+	font-size:12px;
+	margin:0px 30px;
+	padding:2px 0px;
+}
+
+.event.listening {
+	background-color:#333333;
+	display:block;
+}
+
+.event.received {
+	background-color:#4B946A;
+	display:none;
+}
+
+/* ANIMATIONS */
+
+@keyframes fade {
+	from { opacity: 1.0; }
+	50% { opacity: 0.4; }
+	to { opacity: 1.0; }
+}
+
+@-webkit-keyframes fade {
+	from { opacity: 1.0; }
+	50% { opacity: 0.4; }
+	to { opacity: 1.0; }
+}
+
+.blink {
+	animation:fade 3000ms infinite;
+	-webkit-animation:fade 3000ms infinite;
+}
+
+
+/* MENU */
+ul#mainnav {
+	list-style: none; 
+	font-size: 1.4em;
+	line-height: 1.8;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	text-align: left;
+	white-space: nowrap;
+	background: transparent url('../img/bgpattern.gif') repeat-x center center;
+	background-size: 100% 100%;
+
+/*
+	overflow-x: scroll;
+	-webkit-overflow-scrolling: touch;
+*/
+}
+
+	ul#mainnav li {
+		display: inline-block;
+		width: 33.3333333%;
+		height: 99%;
+		position: relative;
+		overflow: hidden;
+		box-sizing: border-box;
+		white-space: nowrap;
+	}
+		ul#mainnav li a {
+			width: 100%;
+			height: 50%;
+			display: block;
+			box-sizing: border-box;
+			border: solid #ddd 1px;
+/*
+			background-color: #bbbcbd;
+*/
+			text-align: center;
+			color: #000;
+			text-decoration: none;
+			font-size: 1.5em;
+			white-space: normal;
+			position: relative;
+		}
+			ul#mainnav li a .imagewrapper img {
+				max-width: 100%;
+/*
+				max-height: 60%;
+*/
+			}
+			ul#mainnav li a .imagewrapper {
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin: 0 auto;
+				text-align: center;
+				height: 45%;
+				overflow: hidden;
+			}
+				ul#mainnav li a:first-child .imagewrapper {
+					top: auto;
+					bottom: 25%;
+					height: auto;
+				}
+
+			ul#mainnav li a span {
+				position: absolute;
+				width: 100%;
+				left: 0;
+				padding: 1em;
+				box-sizing: border-box;
+				top: 43%;
+				line-height: 1.2;
+				font-weight: 100;
+/*
+				background-color: #bbbcbd;
+*/
+			}
+				ul#mainnav li a:first-child span {
+					top: 69%;
+				}
+
+			ul#mainnav li a .mediatype {
+				background-color: #f6dc01;
+				width: 63px;
+				height: 45px;
+				position: absolute;
+				top: 0;
+				background-image: url('../img/sprite-icons.png');
+				background-size: auto 100%;
+			}
+			ul#mainnav li a:first-child .mediatype { top: auto; bottom: 0; right: 0;}
+			ul#mainnav li a .mediatype.image { background-position: left center; }
+			ul#mainnav li a .mediatype.video { background-position: right center; }
+			ul#mainnav li a .mediatype.left { left: 0 }
+			ul#mainnav li a .mediatype.right { right: 0 }
+
+
+		.extracontent, ul#mainnav li.extracontent {
+
+		}
+
+
+/* modal window + content */
+
+video.videoplayer {
+	background-color: black;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 5;
+	width: 85%;
+	box-shadow: 2px 2px 8px #000;
+/*
+	height: 240px;
+*/
+	margin: auto;
+	-webkit-transform-style: preserve-3d;
+}
+	video.videoplayer.fullscreen {
+		width: 100%;
+		height: 100%;
+	}
+
+.modal {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+/*
+	border: dashed red 5px;
+*/
+	background: -webkit-linear-gradient(#5a4646 0%, #211c1c 100%);
+	color: #fff;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+	display: none;
+}
+	.animated.modal {
+		-webkit-animation-duration:	0.5s;
+		-moz-animation-duration:	0.5s;
+		animation-duration:			0.5s;
+	}
+	
+	.modal.imagemodal {
+		background: rgba(50,50,50,.92) none;
+	}
+	.modal.imagemodal .closebutton {
+		position: absolute;
+		float: none;
+		right: 0;
+	}
+
+.modal h2 {
+	display: none;
+}
+
+.animated {
+	display: block;
+}
+
+.closebutton {
+	float: right;
+	height: 2em;
+	width: 2em;
+	text-align: center;
+	line-height: 2em;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 2.5em;
+	background-color: gold;
+	color: black;
+	position: relative;
+	z-index: 10;
+}
+	.closebutton:hover {
+/*
+		background-image: -webkit-linear-gradient(#eeee00 0%, #820000 100%);
+*/
+	}
+	.closebutton:active {
+/*
+		background-image: -webkit-linear-gradient(#adad00 0%, #535300 100%);
+*/
+	}
+
+/* main curved layout elements */
+.maincurves {
+	z-index: 1;
+	position: absolute;
+	pointer-events: none;
+	width: 100%;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+
+/*
+	background-color: rgba(255,0,0,0.1);
+	opacity: .8;
+*/
+}
+#topbar {
+	top: 0;
+	height: 90%;
+	background-image: url('../img/topbar.png');
+}
+#bottombar {
+	bottom: 0;
+	height: 90%;
+	background-image: url('../img/bottombar.png');
+	background-position: center bottom;
+}
+a#madtooling {
+	position: absolute;
+	z-index: 2;
+	bottom: 4%;
+	left: 4%;
+	color: #FFE146;
+	font-size: 1.785em;
+	padding: .2em;
+}
+/*
+.indicatemore-r {
+	-webkit-mask-image: -webkit-gradient(linear, 90% center, right center, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
+	.indicatemore-r > *:last-child {
+		margin-right: 10%;
+	}
+*/
+
+
+
+
+
+
+
+.swipe {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+.swipe-wrap {
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap > div {
+	float: left;
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+.swipe-wrap > div > img {
+	max-width: 100%;
+	max-height: 100%;
+}
+.swipe .nav {
+	position: absolute;
+	width: 80px;
+	height: 38px;
+	z-index: 10;
+	text-align: center;
+	line-height: 40px;
+	display: none;
+	color: #fff;
+	top: 45%;
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.8);
+}
+.swipe .nav.next {
+	right: 0;
+	-webkit-border-radius: 3px 0 0 3px;
+	border-radius: 3px 0 0 3px;
+}
+.swipe .nav.prev {
+	-webkit-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+}
